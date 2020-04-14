@@ -10,7 +10,7 @@ namespace ScanScreenProxy.Function
     public static class ReadScanData
     {
         [FunctionName("ReadScanData")]
-        public async static Task Run([QueueTrigger("scandata", Connection = "rcscanscreenerproxy_STORAGE")]string myScanItem,
+        public async static Task Run([QueueTrigger("scandata", Connection = "rcscanscreenerproxy_STORAGE")]ParticipantItem myScanItem,
                                 [Table("redcap", Connection = "rcscanscreenerproxy_STORAGE")] CloudTable table, ILogger log)
         {
             log.LogInformation($"C# Queue trigger function processed: {myScanItem}");
@@ -19,11 +19,11 @@ namespace ScanScreenProxy.Function
             // create table entry
             var item = new Participant()
             {
-                PartitionKey = "45",
-                RowKey = "98107",
-                ZipCode = "98107",
+                PartitionKey = myScanItem.ZipCode,
+                RowKey = Guid.NewGuid().ToString(),
+                ZipCode = myScanItem.ZipCode,
                 SurveyDate = DateTime.Now,
-                Age = 45
+                Age = int.Parse(myScanItem.Age)
             };
 
             var operation = TableOperation.Insert(item);
@@ -35,6 +35,12 @@ namespace ScanScreenProxy.Function
             public string ZipCode { get; set; }
             public DateTime SurveyDate {get; set;}
             public int Age { get; set; }   
+        }
+
+        public class ParticipantItem
+        {
+            public string ZipCode { get; set; }            
+            public string Age { get; set; }   
         }
     }
 }

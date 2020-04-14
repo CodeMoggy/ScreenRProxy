@@ -15,25 +15,26 @@ namespace ScanScreenerProxy.Function
         [FunctionName("PostScanData")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, 
-            [Queue("scandata"),StorageAccount("AzureWebJobsStorage")] ICollector<string> msg, 
+            [Queue("scandata"),StorageAccount("AzureWebJobsStorage")] ICollector<ParticipantItem> msg, 
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            string name = req.Query["name"];
-
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            dynamic data = JsonConvert.DeserializeObject(requestBody);
-            name = name ?? data?.name;
+            var item = JsonConvert.DeserializeObject<ParticipantItem>(requestBody);
 
-            if (!string.IsNullOrEmpty(name))
-            {
-                // Add a message to the output collection.
-                msg.Add(string.Format("Name passed to the function: {0}", name));
-            }
-            return name != null
-                ? (ActionResult)new OkObjectResult($"Hello, {name}")
-                : new BadRequestObjectResult("Please pass a name on the query string or in the request body");
+            // Add a message to the output collection.
+            msg.Add(item);
+
+            var referenceNumber = Guid.NewGuid().ToString();
+
+            return (ActionResult)new OkObjectResult(referenceNumber);                ;
+        }
+
+        public class ParticipantItem
+        {
+            public string ZipCode { get; set; }
+            public int Age { get; set; }   
         }
     }
 }
