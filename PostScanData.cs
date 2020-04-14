@@ -15,7 +15,7 @@ namespace ScanScreenerProxy.Function
         [FunctionName("PostScanData")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, 
-            [Queue("outqueue"),StorageAccount("AzureWebJobsStorage")] ICollector<string> msg, 
+            [Queue("scandata"),StorageAccount("AzureWebJobsStorage")] ICollector<string> msg, 
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
