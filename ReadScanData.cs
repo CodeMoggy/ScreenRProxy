@@ -19,7 +19,7 @@ namespace ScanScreenProxy.Function
             // create table entry
             var item = new Participant()
             {
-                PartitionKey = myScanItem.Puma,
+                PartitionKey = myScanItem.ZipCode,
                 RowKey = Guid.NewGuid().ToString(),
                 ZipCode = myScanItem.ZipCode,
                 SurveyDate = DateTime.Now,
