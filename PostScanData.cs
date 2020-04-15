@@ -34,7 +34,8 @@ namespace ScanScreenerProxy.Function
         public class ParticipantItem
         {
             public string ZipCode { get; set; }
-            public int Age { get; set; }   
+            public int Age { get; set; }
+            public int Symptomatic { get; set; }   
         }
     }
 }

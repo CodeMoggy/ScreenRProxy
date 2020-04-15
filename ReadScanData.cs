@@ -22,7 +22,8 @@ namespace ScanScreenProxy.Function
                 RowKey = Guid.NewGuid().ToString(),
                 ZipCode = myScanItem.ZipCode,
                 SurveyDate = DateTime.Now,
-                Age = int.Parse(myScanItem.Age)
+                Age = myScanItem.Age,
+                Symptomatic = myScanItem.Symptomatic
             };
 
             var operation = TableOperation.Insert(item);
@@ -33,13 +34,15 @@ namespace ScanScreenProxy.Function
         {
             public string ZipCode { get; set; }
             public DateTime SurveyDate {get; set;}
-            public int Age { get; set; }   
+            public int Age { get; set; } 
+            public int Symptomatic { get; set; }  
         }
 
         public class ParticipantItem
         {
             public string ZipCode { get; set; }            
-            public string Age { get; set; }   
+            public int Age { get; set; }
+            public int Symptomatic { get; set; }   
         }
     }
 }
