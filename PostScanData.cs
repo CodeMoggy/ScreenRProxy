@@ -7,8 +7,9 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using ScanScreenProxy.Poco;
 
-namespace ScanScreenerProxy.Function
+namespace ScanScreenProxy.Function
 {
     public static class PostScanData
     {
@@ -29,13 +30,6 @@ namespace ScanScreenerProxy.Function
             var referenceNumber = Guid.NewGuid().ToString();
 
             return (ActionResult)new OkObjectResult(referenceNumber);                ;
-        }
-
-        public class ParticipantItem
-        {
-            public string ZipCode { get; set; }
-            public int Age { get; set; }
-            public int Symptomatic { get; set; }   
         }
     }
 }
