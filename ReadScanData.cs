@@ -1,6 +1,5 @@
 using System;
 using Microsoft.Azure.WebJobs;
-using Microsoft.Azure.WebJobs.Host;
 using Microsoft.Extensions.Logging;
 using Microsoft.WindowsAzure.Storage.Table;
 using System.Threading.Tasks;
@@ -10,8 +9,8 @@ namespace ScanScreenProxy.Function
     public static class ReadScanData
     {
         [FunctionName("ReadScanData")]
-        public async static Task Run([QueueTrigger("scandata", Connection = "rcscanscreenerproxy_STORAGE")]ParticipantItem myScanItem,
-                                [Table("redcap", Connection = "rcscanscreenerproxy_STORAGE")] CloudTable table, ILogger log)
+        public async static Task Run([QueueTrigger("scandata"), StorageAccount("AzureWebJobsStorage")]ParticipantItem myScanItem,
+                                [Table("redcap"), StorageAccount("AzureWebJobsStorage")] CloudTable table, ILogger log)
         {
             log.LogInformation($"C# Queue trigger function processed: {myScanItem}");
 
