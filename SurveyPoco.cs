@@ -45,8 +45,8 @@ namespace Survey.Poco
         public string LongerTermDiseases { get; set; }
         public string AceInhibitors { get; set; }
         public string PlacesOfVocation { get; set; }
-        public string OutsideUsIn14Days { get; set; }
-        public string OutsideStateIn14Days { get; set; }
+        public string OutsideUs { get; set; }
+        public string OutsideState { get; set; }
         public string ZipCode { get; set; }
         public int Age { get; set; }
         public int Symptomatic { get; set; }
