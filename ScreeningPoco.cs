@@ -2,9 +2,9 @@
 using System;
 using Microsoft.WindowsAzure.Storage.Table;
 
-namespace ScanScreenProxy.Poco
+namespace Screening.Poco
 {
-    public class ParticipantItem
+    public class ScreeningItem
     {
         public string ZipCode { get; set; }
         public int Age { get; set; }
@@ -12,7 +12,7 @@ namespace ScanScreenProxy.Poco
         public string Puma { get; set; }   
     }
     
-    public class Participant : TableEntity
+    public class ScreeningData : TableEntity
     {
         public string ZipCode { get; set; }
         public int Age { get; set; }

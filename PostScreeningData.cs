@@ -7,22 +7,22 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using ScanScreenProxy.Poco;
+using Screening.Poco;
 
 namespace ScanScreenProxy.Function
 {
-    public static class PostScanData
+    public static class PostScreeningData
     {
-        [FunctionName("PostScanData")]
+        [FunctionName("PostScreeningData")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, 
-            [Queue("scandata"),StorageAccount("AzureWebJobsStorage")] ICollector<ParticipantItem> msg, 
+            [Queue("screeningdata"),StorageAccount("AzureWebJobsStorage")] ICollector<ScreeningItem> msg, 
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
-            var item = JsonConvert.DeserializeObject<ParticipantItem>(requestBody);
+            var item = JsonConvert.DeserializeObject<ScreeningItem>(requestBody);
 
             // Add a message to the output collection.
             msg.Add(item);
