@@ -10,8 +10,8 @@ namespace ScanScreenProxy.Function
     public static class ReadSurveyData
     {
         [FunctionName("ReadSurveyData")]
-        public async static Task Run([QueueTrigger("surveydata"), StorageAccount("AzureWebJobsStorage")]SurveyItem mySurveyItem,
-                                [Table("redcapsurvey"), StorageAccount("AzureWebJobsStorage")] CloudTable table, ILogger log)
+        public async static Task Run([QueueTrigger("phase1surveydata"), StorageAccount("AzureWebJobsStorage")]SurveyItem mySurveyItem,
+                                [Table("phase1survey"), StorageAccount("AzureWebJobsStorage")] CloudTable table, ILogger log)
         {
             log.LogInformation($"C# Queue trigger function processed: {mySurveyItem}");
 
@@ -22,26 +22,25 @@ namespace ScanScreenProxy.Function
                 PartitionKey = mySurveyItem.ZipCode,
                 RowKey = Guid.NewGuid().ToString(),
                 SurveyDate = DateTime.Now,
-                SickInTheLastWeek = mySurveyItem.SickInTheLastWeek,
-                SexAtBirth = mySurveyItem.SexAtBirth,
-                DetailedSymptoms = mySurveyItem.DetailedSymptoms,
-                IsHispanicOrLatina = mySurveyItem.IsHispanicOrLatina,
-                Race = mySurveyItem.Race,
-                Income = mySurveyItem.Income,
-                WhereDoYouLive = mySurveyItem.WhereDoYouLive,
-                LivingSpace = mySurveyItem.LivingSpace,
-                ClinicalCare = mySurveyItem.ClinicalCare,
-                TobaccoProducts = mySurveyItem.TobaccoProducts,
-                MedicalConditions = mySurveyItem.MedicalConditions,
-                LongerTermDiseases = mySurveyItem.LongerTermDiseases,
-                AceInhibitors = mySurveyItem.AceInhibitors,
-                PlacesOfVocation = mySurveyItem.PlacesOfVocation,
-                OutsideUs = mySurveyItem.OutsideUsIn14Days,
-                OutsideState = mySurveyItem.OutsideStateIn14Days,
+                MyselfOrSomeoneElse = mySurveyItem.MyselfOrSomeoneElse,
                 ZipCode = mySurveyItem.ZipCode,
-                Symptomatic = mySurveyItem.Symptomatic,
                 Puma = mySurveyItem.Puma,
-                Age = mySurveyItem.Age  
+                Age = mySurveyItem.Age,
+                Sex = mySurveyItem.Sex,
+                BinarySymptoms = mySurveyItem.BinarySymptoms,
+                SpecificSymptoms = mySurveyItem.SpecificSymptoms,
+                AllSymptoms = mySurveyItem.AllSymptoms,
+                Housing = mySurveyItem.Housing,
+                SharedSpace = mySurveyItem.SharedSpace,
+                ContactWith = mySurveyItem.ContactWith,
+                WorkFromHome = mySurveyItem.WorkFromHome,
+                Industry = mySurveyItem.Industry,
+                IndustryOther = mySurveyItem.IndustryOther,
+                BehaviorCleanItems = mySurveyItem.BehaviorCleanItems,
+                BehaviorCoughInElbow = mySurveyItem.BehaviorCoughInElbow,
+                BehaviorStaySixFeetAway = mySurveyItem.BehaviorStaySixFeetAway,
+                BehaviorWashHands = mySurveyItem.BehaviorWashHands,
+                BehaviorWearFaceMask = mySurveyItem.BehaviorWearFaceMask
             };
 
             var operation = TableOperation.Insert(item);

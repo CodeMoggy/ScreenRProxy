@@ -10,8 +10,8 @@ namespace ScanScreenProxy.Function
     public static class ReadScreeningData
     {
         [FunctionName("ReadScreeningData")]
-        public async static Task Run([QueueTrigger("screeningdata"), StorageAccount("AzureWebJobsStorage")]ScreeningItem myScanItem,
-                                [Table("scanscreening"), StorageAccount("AzureWebJobsStorage")] CloudTable table, ILogger log)
+        public async static Task Run([QueueTrigger("phase2screeningdata"), StorageAccount("AzureWebJobsStorage")]ScreeningItem myScanItem,
+                                [Table("phase2creening"), StorageAccount("AzureWebJobsStorage")] CloudTable table, ILogger log)
         {
             log.LogInformation($"C# Queue trigger function processed: {myScanItem}");
 
@@ -22,9 +22,11 @@ namespace ScanScreenProxy.Function
                 PartitionKey = myScanItem.ZipCode,
                 RowKey = Guid.NewGuid().ToString(),
                 ZipCode = myScanItem.ZipCode,
-                SurveyDate = DateTime.Now,
+                ScreeningDate = DateTime.Now,
                 Age = myScanItem.Age,
-                Symptomatic = myScanItem.Symptomatic,
+                BinarySymptoms = myScanItem.BinarySymptoms,
+                SpecificSymptoms = myScanItem.SpecificSymptoms,
+                Session = myScanItem.Session,
                 Puma = myScanItem.Puma
             };
 
