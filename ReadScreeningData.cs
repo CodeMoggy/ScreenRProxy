@@ -10,8 +10,8 @@ namespace ScanScreenProxy.Function
     public static class ReadScreeningData
     {
         [FunctionName("ReadScreeningData")]
-        public async static Task Run([QueueTrigger("phase2screeningdata"), StorageAccount("AzureWebJobsStorage")]ScreeningItem myScanItem,
-                                [Table("phase2screening"), StorageAccount("AzureWebJobsStorage")] CloudTable table, ILogger log)
+        public async static Task Run([QueueTrigger("screeningdata"), StorageAccount("AzureWebJobsStorage")]ScreeningItem myScanItem,
+                                [Table("screeningdata"), StorageAccount("AzureWebJobsStorage")] CloudTable table, ILogger log)
         {
             log.LogInformation($"C# Queue trigger function processed: {myScanItem}");
 

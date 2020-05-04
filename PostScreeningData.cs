@@ -16,19 +16,19 @@ namespace ScanScreenProxy.Function
         [FunctionName("PostScreeningData")]
         public static async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Function, "get", "post", Route = null)] HttpRequest req, 
-            [Queue("phase2screeningdata"),StorageAccount("AzureWebJobsStorage")] ICollector<ScreeningItem> msg, 
+            [Queue("screeningdata"),StorageAccount("AzureWebJobsStorage")] ICollector<ScreeningItem> msg, 
             ILogger log)
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             var item = JsonConvert.DeserializeObject<ScreeningItem>(requestBody);
-            item.Session = Guid.NewGuid().ToString();
+            item.id = Guid.NewGuid().ToString();
 
             // Add a message to the output collection.
             msg.Add(item);
 
-            return (ActionResult)new OkObjectResult(item.Session);                ;
+            return (ActionResult)new OkObjectResult(item.id);                ;
         }
     }
 }
