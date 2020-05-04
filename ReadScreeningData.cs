@@ -11,7 +11,7 @@ namespace ScanScreenProxy.Function
     {
         [FunctionName("ReadScreeningData")]
         public async static Task Run([QueueTrigger("phase2screeningdata"), StorageAccount("AzureWebJobsStorage")]ScreeningItem myScanItem,
-                                [Table("phase2creening"), StorageAccount("AzureWebJobsStorage")] CloudTable table, ILogger log)
+                                [Table("phase2screening"), StorageAccount("AzureWebJobsStorage")] CloudTable table, ILogger log)
         {
             log.LogInformation($"C# Queue trigger function processed: {myScanItem}");
 
@@ -19,15 +19,13 @@ namespace ScanScreenProxy.Function
             // create table entry
             var item = new ScreeningData()
             {
-                PartitionKey = myScanItem.ZipCode,
-                RowKey = Guid.NewGuid().ToString(),
-                ZipCode = myScanItem.ZipCode,
-                ScreeningDate = DateTime.Now,
-                Age = myScanItem.Age,
-                BinarySymptoms = myScanItem.BinarySymptoms,
-                SpecificSymptoms = myScanItem.SpecificSymptoms,
-                Session = myScanItem.Session,
-                Puma = myScanItem.Puma
+                PartitionKey = myScanItem.zip,
+                RowKey = myScanItem.id,
+                puma = myScanItem.puma,
+                zip = myScanItem.zip,            
+                age = myScanItem.age,
+                symptoms_binary = myScanItem.symptoms_binary,
+                symptoms_specific = myScanItem.symptoms_specific
             };
 
             var operation = TableOperation.Insert(item);

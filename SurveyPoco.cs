@@ -6,48 +6,51 @@ namespace Survey.Poco
 {
     public class SurveyItem
     {
-        public string MyselfOrSomeoneElse { get; set; }
-        public string ZipCode { get; set; }
-        public string Puma { get; set; }
-        public int Age { get; set; }
-        public string Sex { get; set; }
-        public string BinarySymptoms { get; set; }
-        public string SpecificSymptoms { get; set; }
-        public string AllSymptoms { get; set; }
-        public string Housing { get; set; }
-        public int SharedSpace { get; set; }
-        public string ContactWith { get; set; }
-        public string WorkFromHome { get; set; }
-        public string Industry { get; set; }
-        public string IndustryOther { get; set; }
-        public string BehaviorWashHands { get; set; }
-        public string BehaviorCleanItems { get; set; }
-        public string BehaviorCoughInElbow { get; set; }
-        public string BehaviorWearFaceMask { get; set; }
-        public string BehaviorStaySixFeetAway { get; set; }
+        public string id { get; set; }
+        public string filling_out_for { get; set; }
+        public string zip { get; set; }
+        public string puma { get; set; }
+        public int age { get; set; }
+        public string sex { get; set; }
+        public string symptoms_binary { get; set; }
+        public string symptoms_specific { get; set; }
+        public string symptoms_all { get; set; }
+        public string housing { get; set; }
+        public int shared_space { get; set; }
+        public string covid_contact { get; set; }
+        public string work_from_home { get; set; }
+        public string industry { get; set; }
+        public string industry_other { get; set; }
+        public string behavior_change_hands { get; set; }
+        public string behavior_change_sufaces { get; set; }
+        public string behavior_change_cough { get; set; }
+        public string behavior_change_mask { get; set; }
+        public string behavior_change_distance { get; set; }
+        public string screener { get; set; }
     }
     
     public class SurveyData : TableEntity
     {
-         public string MyselfOrSomeoneElse { get; set; }
-        public string ZipCode { get; set; }
-        public string Puma { get; set; }
-        public int Age { get; set; }
-        public string Sex { get; set; }
-        public string BinarySymptoms { get; set; }
-        public string SpecificSymptoms { get; set; }
-        public string AllSymptoms { get; set; }
-        public string Housing { get; set; }
-        public int SharedSpace { get; set; }
-        public string ContactWith { get; set; }
-        public string WorkFromHome { get; set; }
-        public string Industry { get; set; }
-        public string IndustryOther { get; set; }
-        public string BehaviorWashHands { get; set; }
-        public string BehaviorCleanItems { get; set; }
-        public string BehaviorCoughInElbow { get; set; }
-        public string BehaviorWearFaceMask { get; set; }
-        public string BehaviorStaySixFeetAway { get; set; }
-        public DateTime SurveyDate { get; set; }
+        public string id { get; set; }
+        public string filling_out_for { get; set; }
+        public string zip { get; set; }
+        public string puma { get; set; }
+        public int age { get; set; }
+        public string sex { get; set; }
+        public string symptoms_binary { get; set; }
+        public string symptoms_specific { get; set; }
+        public string symptoms_all { get; set; }
+        public string housing { get; set; }
+        public int shared_space { get; set; }
+        public string covid_contact { get; set; }
+        public string work_from_home { get; set; }
+        public string industry { get; set; }
+        public string industry_other { get; set; }
+        public string behavior_change_hands { get; set; }
+        public string behavior_change_sufaces { get; set; }
+        public string behavior_change_cough { get; set; }
+        public string behavior_change_mask { get; set; }
+        public string behavior_change_distance { get; set; }
+        public string screener { get; set; }
     }
 }
